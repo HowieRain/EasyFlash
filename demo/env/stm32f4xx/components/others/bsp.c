@@ -39,18 +39,18 @@ void rt_hw_board_init()
  */
 static void RCC_Configuration(void)
 {
-	//ÏÂÃæÊÇ¸ø¸÷Ä£¿é¿ªÆôÊ±ÖÓ
-	//Æô¶¯GPIO
+	//ä¸‹é¢æ˜¯ç»™å„æ¨¡å—å¼€å¯æ—¶é’Ÿ
+	//å¯åŠ¨GPIO
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOB | \
 	                       RCC_AHB1Periph_GPIOC | RCC_AHB1Periph_GPIOD | \
 	                       RCC_AHB1Periph_GPIOE | RCC_AHB1Periph_GPIOG,
 	                       ENABLE);
 
-	//Æô¶¯USART1Ê±ÖÓ
+	//å¯åŠ¨USART1æ—¶é’Ÿ
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-	//Æô¶¯USART2Ê±ÖÓ
+	//å¯åŠ¨USART2æ—¶é’Ÿ
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-	//Æô¶¯DMAÊ±ÖÓ
+	//å¯åŠ¨DMAæ—¶é’Ÿ
 	RCC_APB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 	/* Enable ADC1 and GPIOC clock */
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
@@ -99,7 +99,7 @@ static void GPIO_Configuration(void)
     GPIO_Init(GPIOF, &GPIO_InitStructure);
     GPIO_Init(GPIOG, &GPIO_InitStructure);
 
-	/******************ÏµÍ³ÔËĞĞLEDÖ¸Ê¾µÆÅäÖÃ*******************/
+	/******************ç³»ç»Ÿè¿è¡ŒLEDæŒ‡ç¤ºç¯é…ç½®*******************/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
     GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;

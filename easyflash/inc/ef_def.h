@@ -29,6 +29,8 @@
 #ifndef EF_DEF_H_
 #define EF_DEF_H_
 
+#include "elog.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -52,12 +54,12 @@ extern "C" {
 
 /* EasyFlash debug print function. Must be implement by user. */
 #ifdef PRINT_DEBUG
-#define EF_DEBUG(...) ef_log_debug(__FILE__, __LINE__, __VA_ARGS__)
+#define EF_DEBUG(...) log_e(__FILE__, __LINE__, __VA_ARGS__)
 #else
 #define EF_DEBUG(...)
 #endif
 /* EasyFlash routine print function. Must be implement by user. */
-#define EF_INFO(...)  ef_log_info(__VA_ARGS__)
+#define EF_INFO(...)  log_e(__VA_ARGS__)
 /* EasyFlash assert for developer. */
 #define EF_ASSERT(EXPR)                                                       \
 if (!(EXPR))                                                                  \

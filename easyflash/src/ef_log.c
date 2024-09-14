@@ -293,6 +293,9 @@ static void find_start_and_end_addr(void) {
                 EF_DEBUG("Error: Log area error! Now will clean all log area.\n");
                 ef_log_clean();
                 return;
+            case SECTOR_STATUS_HEADER_ERROR:
+                EF_DEBUG("Error: Log area error! (SECTOR_STATUS_HEADER_ERROR).\n");
+                return;
             }
             empty_sec_counts++;
             break;
@@ -315,6 +318,9 @@ static void find_start_and_end_addr(void) {
                 log_start_addr = log_area_start_addr + cur_size;
                 cur_using_sec_addr = log_area_start_addr + cur_size - EF_ERASE_MIN_SIZE;
                 break;
+            case SECTOR_STATUS_HEADER_ERROR:
+                EF_DEBUG("Error: Log area error! (SECTOR_STATUS_HEADER_ERROR).\n");
+                return;
             }
             using_sec_counts++;
             break;
@@ -351,6 +357,9 @@ static void find_start_and_end_addr(void) {
                 break;
             case SECTOR_STATUS_FULL:
                 break;
+            case SECTOR_STATUS_HEADER_ERROR:
+                EF_DEBUG("Error: Log area error! (SECTOR_STATUS_HEADER_ERROR).\n");
+                return;
             }
             full_sector_counts++;
             break;

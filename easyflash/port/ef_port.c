@@ -28,10 +28,13 @@
 
 #include <easyflash.h>
 #include <stdarg.h>
+#include "include.h"
+#include "sfud.h"
 
 /* default environment variables set for user */
 static const ef_env default_env_set[] = {
-
+    {"boot_times", "0"},
+    {"test_cnt" , "123abc"}
 };
 
 /**
@@ -63,8 +66,9 @@ EfErrCode ef_port_init(ef_env const **default_env, size_t *default_env_size) {
  */
 EfErrCode ef_port_read(uint32_t addr, uint32_t *buf, size_t size) {
     EfErrCode result = EF_NO_ERR;
-
+    
     /* You can add your code under here. */
+    sfud_read(sfud_get_device(0), addr, size, (uint8_t *)buf);
 
     return result;
 }
@@ -86,6 +90,7 @@ EfErrCode ef_port_erase(uint32_t addr, size_t size) {
     EF_ASSERT(addr % EF_ERASE_MIN_SIZE == 0);
 
     /* You can add your code under here. */
+    sfud_erase(sfud_get_device(0), addr, size);
 
     return result;
 }
@@ -104,6 +109,7 @@ EfErrCode ef_port_write(uint32_t addr, const uint32_t *buf, size_t size) {
     EfErrCode result = EF_NO_ERR;
     
     /* You can add your code under here. */
+    sfud_write(sfud_get_device(0), addr, size, (uint8_t *)buf);
 
     return result;
 }
@@ -114,7 +120,7 @@ EfErrCode ef_port_write(uint32_t addr, const uint32_t *buf, size_t size) {
 void ef_port_env_lock(void) {
     
     /* You can add your code under here. */
-    
+    tx_mutex_get(&mutex_EFlashEnvLock, TX_WAIT_FOREVER);
 }
 
 /**
@@ -123,7 +129,7 @@ void ef_port_env_lock(void) {
 void ef_port_env_unlock(void) {
     
     /* You can add your code under here. */
-    
+    tx_mutex_put(&mutex_EFlashEnvLock);
 }
 
 
